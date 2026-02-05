@@ -7,11 +7,27 @@
   publish = "dist"
 
 # -----------------
+# 🔐 Passwortschutz (Development)
+# -----------------
+# WICHTIG: Vor Go-Live entfernen oder auskommentieren!
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Basic-Auth = "svstaden:PillePalle123!"
+    # Format: "username:passwort"
+    # Zum Deaktivieren: Diese Zeile löschen oder auskommentieren
+
+# -----------------
 # 🔐 Security Headers
 # -----------------
 [[headers]]
   for = "/*"
   [headers.values]
+    # HTTPS erzwingen (HSTS)
+    # Browser merkt sich: Diese Seite NUR über HTTPS aufrufen
+    # max-age=31536000 = 1 Jahr
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
     # Verhindert Einbettung in iframes (Clickjacking-Schutz)
     X-Frame-Options = "DENY"
     
