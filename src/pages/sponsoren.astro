@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const sponsors = {
+  gold: [
+    { name: 'Schlüsseldienst-jetzt.de', url: 'https://www.schluesseldienst-jetzt.de/', desc: 'Trikotsponsor' },
+  ],
+  silver: [
+    { name: 'Picksport.de', url: 'https://www.picksport.de/', desc: 'Partner' },
+    { name: 'Preis-King.com', url: 'https://preis-king.com/', desc: 'Partner' },
+    { name: 'Hanfosan.de', url: 'https://www.hanfosan.de/', desc: 'Partner' },
+  ],
+  bronze: [
+    { name: 'Simdealz', url: 'https://www.simdealz.de/', desc: 'Unterstützer' },
+  ],
+};
+
+const benefits = [
+  { icon: '📺', title: 'Bandenwerbung', desc: 'Ihr Logo prominent am Spielfeldrand' },
+  { icon: '👕', title: 'Trikotwerbung', desc: 'Präsenz auf den Trikots unserer Mannschaften' },
+  { icon: '🌐', title: 'Website', desc: 'Verlinkung und Logo auf unserer Website' },
+  { icon: '📱', title: 'Social Media', desc: 'Erwähnung in unseren Social Media Kanälen' },
+  { icon: '🎉', title: 'Events', desc: 'VIP-Einladungen zu Vereinsveranstaltungen' },
+  { icon: '📰', title: 'Presse', desc: 'Nennung in Pressemitteilungen' },
+];
+---
+
+<BaseLayout title="Sponsoren" description="Unsere Partner und Sponsoren – Gemeinsam stark!">
+  <!-- Hero -->
+  <section class="bg-dark pt-12 pb-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-primary/20 to-transparent"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <span class="text-accent font-heading tracking-[0.2em] text-sm">PARTNER</span>
+      <h1 class="font-heading text-5xl md:text-6xl font-bold mt-2 accent-line">SPONSOREN</h1>
+      <p class="text-gray-400 mt-8 max-w-2xl">Gemeinsam stark – dank unserer Partner und Unterstützer.</p>
+    </div>
+  </section>
+
+  <!-- Danke -->
+  <section class="py-16 bg-dark-50 border-b border-white/10">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="font-heading text-3xl font-bold mb-4">DANKE FÜR EURE <span class="text-accent">UNTERSTÜTZUNG!</span></h2>
+      <p class="text-gray-400 max-w-2xl mx-auto">
+        Ohne unsere Sponsoren und Partner wäre unsere Vereinsarbeit nicht möglich. Sie ermöglichen uns Spielbetrieb, Jugendförderung und Veranstaltungen auf hohem Niveau.
+      </p>
+    </div>
+  </section>
+
+  <!-- Hauptsponsoren -->
+  <section class="py-20 bg-dark">
+    <div class="container mx-auto px-4">
+      <div class="mb-12">
+        <div class="flex items-center gap-4">
+          <span class="w-12 h-12 bg-yellow-500 flex items-center justify-center">
+            <span class="text-2xl">🏆</span>
+          </span>
+          <div>
+            <span class="text-yellow-500 font-heading tracking-[0.2em] text-sm">PREMIUM</span>
+            <h2 class="font-heading text-2xl font-bold">HAUPTSPONSOREN</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sponsors.gold.map((sponsor) => (
+          <a href={sponsor.url} target="_blank" rel="noopener" class="bg-gradient-to-br from-yellow-500/20 to-dark-50 border-2 border-yellow-500/50 p-8 hover:border-yellow-500 transition-colors group block">
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-20 h-20 bg-white/10 flex items-center justify-center">
+                <span class="text-4xl">🏢</span>
+              </div>
+              <span class="bg-yellow-500 text-dark text-xs font-heading font-bold px-3 py-1 tracking-wider">HAUPTSPONSOR</span>
+            </div>
+            <h3 class="font-heading font-bold text-2xl mb-2 group-hover:text-yellow-500 transition-colors">{sponsor.name}</h3>
+            <p class="text-gray-400">{sponsor.desc}</p>
+            <div class="flex items-center gap-2 text-yellow-500 mt-4 font-heading text-sm tracking-wider">
+              WEBSITE BESUCHEN
+              <svg class="w-4 h-4 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner -->
+  <section class="py-20 bg-dark-50">
+    <div class="container mx-auto px-4">
+      <div class="mb-12">
+        <div class="flex items-center gap-4">
+          <span class="w-12 h-12 bg-gray-400 flex items-center justify-center">
+            <span class="text-2xl">🥈</span>
+          </span>
+          <div>
+            <span class="text-gray-400 font-heading tracking-[0.2em] text-sm">SILBER</span>
+            <h2 class="font-heading text-2xl font-bold">PARTNER</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {sponsors.silver.map((sponsor) => (
+          <a href={sponsor.url} target="_blank" rel="noopener" class="bg-dark border border-white/10 p-6 hover:border-gray-400 transition-colors group block">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-14 h-14 bg-white/10 flex items-center justify-center">
+                <span class="text-2xl">🏢</span>
+              </div>
+              <div>
+                <h3 class="font-heading font-bold text-lg group-hover:text-accent transition-colors">{sponsor.name}</h3>
+                <p class="text-gray-500 text-sm">{sponsor.desc}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-accent text-sm font-heading tracking-wider">
+              BESUCHEN
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Unterstützer -->
+  <section class="py-20 bg-dark">
+    <div class="container mx-auto px-4">
+      <div class="mb-12">
+        <div class="flex items-center gap-4">
+          <span class="w-12 h-12 bg-orange-700 flex items-center justify-center">
+            <span class="text-2xl">🥉</span>
+          </span>
+          <div>
+            <span class="text-orange-500 font-heading tracking-[0.2em] text-sm">BRONZE</span>
+            <h2 class="font-heading text-2xl font-bold">UNTERSTÜTZER</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-4">
+        {sponsors.bronze.map((sponsor) => (
+          <a href={sponsor.url} target="_blank" rel="noopener" class="bg-dark-50 border border-white/10 px-6 py-4 hover:border-orange-500 transition-colors group inline-flex items-center gap-3">
+            <span class="text-xl">🏢</span>
+            <span class="font-heading font-bold group-hover:text-orange-500 transition-colors">{sponsor.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsor werden -->
+  <section class="py-24 bg-primary relative overflow-hidden">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="text-accent font-heading tracking-[0.2em] text-sm">INTERESSE?</span>
+          <h2 class="font-heading text-4xl md:text-5xl font-bold mt-2 mb-6">
+            WERDEN SIE<br /><span class="text-accent">SPONSOR!</span>
+          </h2>
+          <p class="text-blue-100 leading-relaxed mb-8">
+            Sie möchten unseren Verein unterstützen und gleichzeitig Ihr Unternehmen in der Region präsentieren? Wir bieten verschiedene attraktive Sponsoring-Pakete an.
+          </p>
+          <a href="/kontakt" class="inline-block bg-accent text-dark px-8 py-4 font-heading font-bold tracking-wider hover:bg-white transition-colors">
+            JETZT ANFRAGEN
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          {benefits.map((b) => (
+            <div class="bg-white/10 backdrop-blur p-5">
+              <span class="text-2xl mb-3 block">{b.icon}</span>
+              <h3 class="font-heading font-bold mb-1">{b.title}</h3>
+              <p class="text-blue-200 text-sm">{b.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

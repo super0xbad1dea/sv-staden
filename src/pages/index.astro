@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const news = [
+  { title: 'Saisonauftakt gegen TSV Reichelsheim', date: '15. März 2024', image: '/images/news/news1.jpg', slug: 'saisonauftakt' },
+  { title: 'Jugendturnier ein voller Erfolg', date: '10. März 2024', image: '/images/news/news2.jpg', slug: 'jugendturnier' },
+  { title: 'Neue Trikots vorgestellt', date: '01. März 2024', image: '/images/news/news3.jpg', slug: 'neue-trikots' },
+];
+
+const players = [
+  { name: 'Max Mustermann', position: 'Torwart', number: '1', image: '/images/players/player1.jpg' },
+  { name: 'Tim Schmidt', position: 'Verteidiger', number: '4', image: '/images/players/player2.jpg' },
+  { name: 'Jonas Weber', position: 'Mittelfeld', number: '8', image: '/images/players/player3.jpg' },
+  { name: 'Lukas Müller', position: 'Stürmer', number: '9', image: '/images/players/player4.jpg' },
+];
+---
+
+<BaseLayout title="Startseite">
+  <!-- HERO SECTION -->
+  <section class="relative min-h-[90vh] flex items-center overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/90 to-primary/60 z-10"></div>
+      <img src="/images/hero-bg.jpg" alt="" class="w-full h-full object-cover" />
+    </div>
+    
+    <!-- Diagonal Accent -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-dark" style="clip-path: polygon(0 100%, 100% 0, 100% 100%, 0 100%);"></div>
+    
+    <!-- Content -->
+    <div class="relative z-20 container mx-auto px-4">
+      <div class="max-w-3xl">
+        <span class="inline-block text-accent font-heading tracking-[0.3em] text-sm mb-4">WILLKOMMEN</span>
+        <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-none">
+          SV TEUTONIA<br />
+          <span class="text-accent">STADEN</span>
+        </h1>
+        <p class="text-xl text-gray-300 mb-8 max-w-xl leading-relaxed">
+          Seit 1921 vereint durch Leidenschaft, Tradition und den gemeinsamen Willen zum Erfolg.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/ueber-uns" class="bg-accent text-dark px-8 py-4 font-heading font-bold tracking-wider hover:bg-white transition-colors">
+            MEHR ERFAHREN
+          </a>
+          <a href="/kontakt" class="border-2 border-white px-8 py-4 font-heading font-bold tracking-wider hover:bg-white hover:text-dark transition-colors">
+            KONTAKT
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+      <svg class="w-6 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- MATCH SECTION -->
+  <section class="py-20 bg-dark relative">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Last Match -->
+        <div class="bg-dark-100 border border-white/10 p-8 relative overflow-hidden group hover:border-accent/50 transition-colors">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-accent/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <span class="text-accent font-heading tracking-[0.2em] text-xs">LETZTES SPIEL</span>
+          <p class="text-gray-400 text-sm mt-1 mb-6">Kreisoberliga • Sportplatz Staden</p>
+          
+          <div class="flex items-center justify-between gap-4">
+            <div class="text-center flex-1">
+              <div class="w-20 h-20 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-3">
+                <img src="/images/logo.png" alt="SV Teutonia" class="w-14 h-14 rounded-full" />
+              </div>
+              <span class="font-heading font-bold text-sm">TEUTONIA</span>
+            </div>
+            
+            <div class="text-center px-6">
+              <div class="font-heading text-5xl font-bold text-white">
+                3<span class="text-accent mx-2">:</span>1
+              </div>
+              <span class="text-gray-500 text-xs tracking-wider">ENDSTAND</span>
+            </div>
+            
+            <div class="text-center flex-1">
+              <div class="w-20 h-20 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-3">
+                <span class="text-2xl">⚽</span>
+              </div>
+              <span class="font-heading font-bold text-sm">GEGNER</span>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-6 border-t border-white/10 text-center">
+            <span class="text-gray-400 text-sm">Samstag, 15. März 2024 • 15:00 Uhr</span>
+          </div>
+        </div>
+
+        <!-- Next Match -->
+        <div class="bg-primary-600 p-8 relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <span class="text-accent font-heading tracking-[0.2em] text-xs">NÄCHSTES SPIEL</span>
+          <p class="text-blue-200 text-sm mt-1 mb-6">Kreisoberliga • Auswärts</p>
+          
+          <div class="flex items-center justify-between gap-4">
+            <div class="text-center flex-1">
+              <div class="w-20 h-20 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                <img src="/images/logo.png" alt="SV Teutonia" class="w-14 h-14 rounded-full" />
+              </div>
+              <span class="font-heading font-bold text-sm">TEUTONIA</span>
+            </div>
+            
+            <div class="text-center px-6">
+              <div class="font-heading text-4xl font-bold text-accent">
+                18:00
+              </div>
+              <span class="text-blue-200 text-xs tracking-wider">ANSTOSS</span>
+            </div>
+            
+            <div class="text-center flex-1">
+              <div class="w-20 h-20 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                <span class="text-2xl">⚽</span>
+              </div>
+              <span class="font-heading font-bold text-sm">GEGNER</span>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-6 border-t border-white/20 text-center">
+            <span class="text-blue-100 text-sm">Samstag, 22. März 2024</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT TEASER -->
+  <section class="py-24 bg-dark-50 relative overflow-hidden">
+    <div class="absolute left-0 top-0 bottom-0 w-1/3 bg-accent/5"></div>
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="relative">
+          <div class="absolute -top-4 -left-4 w-24 h-24 border-4 border-accent"></div>
+          <img src="/images/team-photo.jpg" alt="Mannschaftsfoto" class="relative z-10 w-full aspect-[4/3] object-cover" />
+          <div class="absolute -bottom-4 -right-4 bg-accent text-dark p-6 z-20">
+            <span class="font-heading text-5xl font-bold block">100+</span>
+            <span class="text-sm tracking-wider">JAHRE TRADITION</span>
+          </div>
+        </div>
+        
+        <div>
+          <span class="text-accent font-heading tracking-[0.2em] text-sm">ÜBER UNS</span>
+          <h2 class="font-heading text-4xl md:text-5xl font-bold mt-2 mb-6 accent-line">
+            EINE GROSSE<br />GESCHICHTE
+          </h2>
+          <p class="text-gray-400 leading-relaxed mb-6">
+            Der SV Teutonia 1921 Staden e.V. ist ein Verein voller Leidenschaft für den Fußball. Seit der Gründung hat der Verein eine beeindruckende Geschichte voller Erfolge und Traditionen aufgebaut.
+          </p>
+          <p class="text-gray-400 leading-relaxed mb-8">
+            Wir vermitteln traditionelle Werte wie Zusammenhalt, Fairness und Respekt – und schaffen Gemeinschaftserlebnisse, die weit über den reinen Fußball hinausgehen.
+          </p>
+          <a href="/ueber-uns" class="inline-flex items-center gap-2 text-accent font-heading font-bold tracking-wider hover:gap-4 transition-all">
+            UNSERE GESCHICHTE
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS SECTION -->
+  <section class="py-24 bg-dark">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <span class="text-accent font-heading tracking-[0.2em] text-sm">AKTUELLES</span>
+        <h2 class="font-heading text-4xl md:text-5xl font-bold mt-2 accent-line accent-line-center inline-block">
+          NEUIGKEITEN
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {news.map((item, i) => (
+          <article class="group cursor-pointer">
+            <div class="relative overflow-hidden mb-4">
+              <div class="aspect-[4/3] bg-dark-200">
+                <div class="w-full h-full bg-gradient-to-br from-primary/50 to-dark flex items-center justify-center">
+                  <span class="text-6xl opacity-30">📰</span>
+                </div>
+              </div>
+              <div class="absolute inset-0 bg-accent/0 group-hover:bg-accent/20 transition-colors duration-300"></div>
+              <div class="absolute bottom-0 left-0 right-0 h-1 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </div>
+            <span class="text-accent text-sm">{item.date}</span>
+            <h3 class="font-heading text-xl font-bold mt-2 group-hover:text-accent transition-colors">
+              {item.title}
+            </h3>
+          </article>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/news" class="inline-block border-2 border-accent text-accent px-8 py-3 font-heading font-bold tracking-wider hover:bg-accent hover:text-dark transition-colors">
+          ALLE NEUIGKEITEN
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAYERS PREVIEW -->
+  <section class="py-24 bg-dark-50 relative">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <span class="text-accent font-heading tracking-[0.2em] text-sm">UNSER TEAM</span>
+        <h2 class="font-heading text-4xl md:text-5xl font-bold mt-2 accent-line accent-line-center inline-block">
+          DIE MANNSCHAFT
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {players.map((player) => (
+          <div class="group relative">
+            <div class="aspect-[3/4] bg-dark-200 relative overflow-hidden">
+              <div class="w-full h-full bg-gradient-to-b from-primary/30 to-dark flex items-end justify-center pb-8">
+                <span class="text-8xl opacity-20">👤</span>
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent"></div>
+              <div class="absolute top-4 left-4 bg-accent text-dark w-10 h-10 flex items-center justify-center font-heading font-bold">
+                {player.number}
+              </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark to-transparent">
+              <span class="text-accent text-xs font-heading tracking-wider">{player.position.toUpperCase()}</span>
+              <h3 class="font-heading font-bold text-lg">{player.name}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/mannschaften" class="inline-block bg-accent text-dark px-8 py-3 font-heading font-bold tracking-wider hover:bg-white transition-colors">
+          ALLE SPIELER
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPONSORS -->
+  <section class="py-16 bg-dark border-y border-white/10">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-8">
+        <span class="text-gray-500 font-heading tracking-[0.2em] text-xs">UNSERE PARTNER</span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-12 opacity-60 hover:opacity-100 transition-opacity">
+        <a href="#" class="text-2xl font-heading text-gray-400 hover:text-accent transition-colors">SPONSOR 1</a>
+        <a href="#" class="text-2xl font-heading text-gray-400 hover:text-accent transition-colors">SPONSOR 2</a>
+        <a href="#" class="text-2xl font-heading text-gray-400 hover:text-accent transition-colors">SPONSOR 3</a>
+        <a href="#" class="text-2xl font-heading text-gray-400 hover:text-accent transition-colors">SPONSOR 4</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 bg-primary relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('/images/pattern.png'); background-size: 100px;"></div>
+    </div>
+    <div class="container mx-auto px-4 text-center relative z-10">
+      <h2 class="font-heading text-4xl md:text-6xl font-bold mb-6">
+        WERDE TEIL DER<br /><span class="text-accent">TEUTONIA FAMILIE!</span>
+      </h2>
+      <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+        Egal ob als aktiver Spieler, Unterstützer oder Fan – bei uns ist jeder willkommen.
+      </p>
+      <a href="/kontakt" class="inline-block bg-accent text-dark px-10 py-4 font-heading font-bold tracking-wider text-lg hover:bg-white transition-colors">
+        JETZT KONTAKT AUFNEHMEN
+      </a>
+    </div>
+  </section>
+</BaseLayout>
