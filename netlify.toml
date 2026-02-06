@@ -7,17 +7,6 @@
   publish = "dist"
 
 # -----------------
-# 🔐 Passwortschutz (Development)
-# -----------------
-# WICHTIG: Vor Go-Live entfernen oder auskommentieren!
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Basic-Auth = "svstaden:PillePalle123!"
-    # Format: "username:passwort"
-    # Zum Deaktivieren: Diese Zeile löschen oder auskommentieren
-
-# -----------------
 # 🔐 Security Headers
 # -----------------
 [[headers]]

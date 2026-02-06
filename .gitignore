@@ -28,6 +28,12 @@ dist/
 .astro/
 
 # -----------------
+# 📷 Heruntergeladene News-Bilder (werden bei Build neu erstellt)
+# -----------------
+public/images/news/
+src/data/image-map.json
+
+# -----------------
 # 💻 Editor/IDE
 # -----------------
 .vscode/

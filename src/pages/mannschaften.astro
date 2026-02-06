@@ -6,7 +6,7 @@ const teams = [
     name: '1. Mannschaft',
     league: 'Kreisoberliga Friedberg',
     training: 'Di & Do, 19:00 Uhr',
-    coach: '[Trainer Name]',
+    coach: 'Jens Paetzold',
     description: 'Unsere erste Mannschaft repräsentiert den Verein auf höchstem Niveau in der Kreisoberliga.',
   },
   {
@@ -18,10 +18,10 @@ const teams = [
   },
   {
     name: 'Alte Herren',
-    league: 'Freundschaftsspiele',
-    training: 'Fr, 19:00 Uhr',
-    coach: '[Trainer Name]',
-    description: 'Für alle, die den Spaß am Fußball nie verloren haben – Teamgeist steht im Vordergrund.',
+    league: 'Turniere',
+    training: 'Mi, 19:30 Uhr',
+    coach: 'Manuel Giesel & Dirk Stuckenberg',
+    description: 'Für alle, die den Spaß am Fußball nie verloren haben. Fußball & Geh-Fußball.',
   },
 ];
 
@@ -35,29 +35,24 @@ const youthTeams = [
   { name: 'Bambini', age: 'U7', training: 'Sa, 10:00', coach: '[Name]' },
 ];
 
-const players = [
-  { name: 'Max Mustermann', position: 'Torwart', number: '1' },
-  { name: 'Tim Schmidt', position: 'Verteidiger', number: '2' },
-  { name: 'Felix Wagner', position: 'Verteidiger', number: '3' },
-  { name: 'Paul Becker', position: 'Verteidiger', number: '4' },
-  { name: 'Lukas Hoffmann', position: 'Verteidiger', number: '5' },
-  { name: 'Jonas Weber', position: 'Mittelfeld', number: '6' },
-  { name: 'David Koch', position: 'Mittelfeld', number: '7' },
-  { name: 'Simon Braun', position: 'Mittelfeld', number: '8' },
-  { name: 'Lukas Müller', position: 'Stürmer', number: '9' },
-  { name: 'Jan Fischer', position: 'Stürmer', number: '10' },
-  { name: 'Niklas Schwarz', position: 'Stürmer', number: '11' },
+const otherdepartments = [
+  {
+    name: 'Yoga',
+    training: 'Fr, 19:00 Uhr',
+    coach: 'Jens Paetzold',
+    description: 'Bewegung und Dehnung ist das A & O.',
+  },
 ];
 ---
 
-<BaseLayout title="Mannschaften" description="Alle Mannschaften des SV Teutonia 1921 Staden e.V.">
+<BaseLayout title="Abteilungen" description="Alle Abteilungen des SV Teutonia 1921 Staden e.V.">
   <!-- Hero -->
   <section class="bg-dark pt-12 pb-20 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-b from-primary/20 to-transparent"></div>
     <div class="container mx-auto px-4 relative z-10">
       <span class="text-accent font-heading tracking-[0.2em] text-sm">UNSERE TEAMS</span>
       <h1 class="font-heading text-5xl md:text-6xl font-bold mt-2 accent-line">MANNSCHAFTEN</h1>
-      <p class="text-gray-400 mt-8 max-w-2xl">Von den Bambini bis zur ersten Mannschaft – hier ist für jeden etwas dabei.</p>
+      <p class="text-gray-400 mt-8 max-w-2xl">Von Fußball bis Yoga, von den Bambini bis zur ersten Mannschaft – hier ist für jeden etwas dabei.</p>
     </div>
   </section>
 
@@ -65,7 +60,7 @@ const players = [
   <section class="py-20 bg-dark-50">
     <div class="container mx-auto px-4">
       <div class="mb-12">
-        <span class="text-accent font-heading tracking-[0.2em] text-sm">AKTIVE</span>
+        <span class="text-accent font-heading tracking-[0.2em] text-sm">FUSSBALL</span>
         <h2 class="font-heading text-3xl md:text-4xl font-bold mt-2">HERREN MANNSCHAFTEN</h2>
       </div>
 
@@ -103,38 +98,13 @@ const players = [
     </div>
   </section>
 
-  <!-- 1. Mannschaft Kader -->
-  <section class="py-20 bg-dark">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-12">
-        <span class="text-accent font-heading tracking-[0.2em] text-sm">KADER 2024/25</span>
-        <h2 class="font-heading text-3xl md:text-4xl font-bold mt-2 accent-line accent-line-center inline-block">1. MANNSCHAFT</h2>
-      </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {players.map((player) => (
-          <div class="group relative bg-dark-50 hover:bg-dark-100 transition-colors">
-            <div class="aspect-[3/4] bg-gradient-to-b from-primary/20 to-dark flex items-end justify-center relative overflow-hidden">
-              <span class="text-7xl opacity-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">👤</span>
-              <div class="absolute top-2 left-2 bg-accent text-dark w-8 h-8 flex items-center justify-center font-heading font-bold text-sm">
-                {player.number}
-              </div>
-            </div>
-            <div class="p-3 text-center">
-              <span class="text-accent text-xs font-heading tracking-wider block">{player.position.toUpperCase()}</span>
-              <h3 class="font-heading font-bold text-sm mt-1 group-hover:text-accent transition-colors">{player.name}</h3>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <!-- Jugend -->
-  <section class="py-20 bg-dark-50">
+  <section class="py-20 bg-dark">
     <div class="container mx-auto px-4">
       <div class="mb-12">
-        <span class="text-accent font-heading tracking-[0.2em] text-sm">NACHWUCHS</span>
+        <span class="text-accent font-heading tracking-[0.2em] text-sm">FUSSBALL</span>
         <h2 class="font-heading text-3xl md:text-4xl font-bold mt-2">JUGENDABTEILUNG</h2>
         <p class="text-gray-400 mt-4 max-w-2xl">Unsere Jugendarbeit liegt uns besonders am Herzen. Wir fördern junge Talente und vermitteln Werte wie Teamgeist und Fairplay.</p>
       </div>
@@ -165,6 +135,48 @@ const players = [
                 Trainer: {team.coach}
               </li>
             </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+    <!-- Andere Abteilungen -->
+  <section class="py-20 bg-dark-50">
+    <div class="container mx-auto px-4">
+      <div class="mb-12">
+        <span class="text-accent font-heading tracking-[0.2em] text-sm"></span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold mt-2">ANDERE ABTEILUNGEN</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {otherdepartments.map((team) => (
+          <div class="bg-dark border border-white/10 hover:border-accent/50 transition-colors group">
+            <div class="aspect-video bg-gradient-to-br from-primary/30 to-dark flex items-center justify-center relative overflow-hidden">
+              <span class="text-8xl opacity-20">🧘</span>
+              <div class="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-heading text-2xl font-bold mb-2 group-hover:text-accent transition-colors">{team.name}</h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="bg-primary/30 text-primary-300 text-xs px-3 py-1 font-heading tracking-wider"></span>
+              </div>
+              <ul class="space-y-2 text-sm text-gray-400">
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {team.training}
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Ansprechpartner: {team.coach}
+                </li>
+              </ul>
+              <p class="text-gray-500 text-sm mt-4">{team.description}</p>
+            </div>
           </div>
         ))}
       </div>

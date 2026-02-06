@@ -3,10 +3,9 @@ const currentYear = new Date().getFullYear();
 
 const quickLinks = [
   { href: '/', label: 'Home' },
-  { href: '/mannschaften', label: 'Mannschaften' },
-  { href: '/news', label: 'News' },
+  { href: '/mannschaften', label: 'Abteilungen' },
+  { href: '/aktuelles', label: 'Aktuelles' },
   { href: '/ueber-uns', label: 'Über uns' },
-  { href: '/sponsoren', label: 'Sponsoren' },
   { href: '/kontakt', label: 'Kontakt' },
 ];
 ---
@@ -19,8 +18,8 @@ const quickLinks = [
         <div class="flex items-center gap-3 mb-6">
           <img src="/images/logo.png" alt="Logo" class="h-16 w-16 rounded-full border-2 border-accent" />
           <div>
-            <span class="font-heading font-bold text-xl block">SV TEUTONIA</span>
-            <span class="text-accent text-sm tracking-widest">STADEN 1921</span>
+            <span class="font-heading font-bold text-xl block">SV STADEN</span>
+            <span class="text-accent text-sm tracking-widest">SEIT 1921</span>
           </div>
         </div>
         <p class="text-gray-400 text-sm leading-relaxed">
@@ -89,7 +88,7 @@ const quickLinks = [
   <div class="border-t border-white/10">
     <div class="container mx-auto px-4 py-6">
       <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-        <p>&copy; {currentYear} SV Teutonia 1921 Staden e.V. Alle Rechte vorbehalten.</p>
+        <p>&copy; {currentYear} SV Staden 1921 e.V. Alle Rechte vorbehalten.</p>
         <div class="flex gap-6">
           <a href="/impressum" class="hover:text-accent transition-colors">Impressum</a>
           <a href="/datenschutz" class="hover:text-accent transition-colors">Datenschutz</a>
