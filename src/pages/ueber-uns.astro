@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 
 const timeline = [
   { year: '1921', title: 'Gründung', desc: 'Der SV Staden wird von fußballbegeisterten Bürgern gegründet.' },
@@ -59,7 +60,14 @@ const vorstand = [
         <div class="relative">
           <div class="absolute -top-4 -right-4 w-32 h-32 border-4 border-accent"></div>
           <div class="aspect-square bg-gradient-to-br from-primary/30 to-dark flex items-center justify-center relative">
-            <img src="/images/logo.png" alt="Vereinslogo" class="w-48 h-48 rounded-full border-4 border-accent" />
+            <OptimizedImage
+              src="/images/logo.png"
+              alt="Vereinslogo"
+              aspectRatio="square"
+              loading="lazy"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              class="w-48 h-48 rounded-full border-4 border-accent"
+            />
           </div>
           <div class="absolute -bottom-6 -left-6 bg-dark p-6 border border-white/10">
             <span class="font-heading text-5xl font-bold text-accent block">1921</span>

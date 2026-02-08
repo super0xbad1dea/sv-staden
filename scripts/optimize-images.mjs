@@ -158,12 +158,16 @@ async function optimizeImage(filepath) {
     if (optimizedSize < originalSize) {
       fs.renameSync(tempPath, filepath);
       
-      // Optional: WebP-Version erstellen für moderne Browser
+      // WebP-Version erstellen für moderne Browser
       if (ext !== '.webp') {
-        const webpPath = filepath.replace(ext, '.webp');
-        await sharp(filepath)
-          .webp({ quality: CONFIG.webpQuality })
-          .toFile(webpPath);
+        try {
+          const webpPath = filepath.replace(ext, '.webp');
+          await sharp(filepath)
+            .webp({ quality: CONFIG.webpQuality })
+            .toFile(webpPath);
+        } catch (webpErr) {
+          console.log(`   ⚠️  WebP-Erstellung fehlgeschlagen`);
+        }
       }
       
       // Cache aktualisieren
@@ -186,6 +190,18 @@ async function optimizeImage(filepath) {
     } else {
       // Temp-Datei löschen wenn größer
       fs.unlinkSync(tempPath);
+      
+      // Trotzdem WebP erstellen (auch wenn Original schon gut ist)
+      if (ext !== '.webp') {
+        const webpPath = filepath.replace(ext, '.webp');
+        try {
+          await sharp(filepath)
+            .webp({ quality: CONFIG.webpQuality })
+            .toFile(webpPath);
+        } catch (e) {
+          console.log(`   ⚠️  WebP-Erstellung fehlgeschlagen: ${e.message}`);
+        }
+      }
       
       // Als optimiert markieren (nichts zu verbessern)
       imageCache[filepath] = {
