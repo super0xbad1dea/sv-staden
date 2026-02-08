@@ -1,4 +1,6 @@
 import { Client } from '@notionhq/client';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const notion = new Client({
   auth: import.meta.env.NOTION_API_KEY,
@@ -6,12 +8,12 @@ const notion = new Client({
 
 const databaseId = import.meta.env.NOTION_DATABASE_ID;
 
-// Image-Map laden (falls vorhanden)
+// Image-Map laden (zur Build-Time aus dem Dateisystem)
 let imageMap: Record<string, string> = {};
 try {
-  // @ts-ignore - JSON import
-  const imageMapModule = await import('../data/image-map.json?url');
-  imageMap = imageMapModule.default || {};
+  const mapPath = path.resolve(process.cwd(), 'src', 'data', 'image-map.json');
+  const raw = fs.readFileSync(mapPath, 'utf-8');
+  imageMap = JSON.parse(raw);
   console.log('✅ Image-Map geladen:', Object.keys(imageMap).length, 'Bilder');
 } catch (e) {
   console.warn('⚠️ Image-Map nicht gefunden, verwende Notion-URLs als Fallback');
