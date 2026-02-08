@@ -1,11 +1,14 @@
 ---
 /**
  * Optimierte Bild-Komponente mit:
- * - WebP Support mit Fallback
+ * - WebP Support mit Fallback (nur wenn WebP-Datei existiert)
  * - Lazy Loading
  * - Responsive Images
  * - Aspect Ratio Preservation
  */
+
+import fs from 'node:fs';
+import path from 'node:path';
 
 interface Props {
   src: string;
@@ -30,22 +33,17 @@ const {
 // WebP-Version des Bildes
 const webpSrc = src?.replace(/\.(jpg|jpeg|png)$/i, '.webp');
 
-// Responsive Größen generieren (für verschiedene Bildschirmbreiten)
-const srcset = src ? [
-  { width: 640, src: src },
-  { width: 768, src: src },
-  { width: 1024, src: src },
-  { width: 1280, src: src },
-  { width: 1920, src: src },
-] : [];
-
-const webpSrcset = webpSrc ? [
-  { width: 640, src: webpSrc },
-  { width: 768, src: webpSrc },
-  { width: 1024, src: webpSrc },
-  { width: 1280, src: webpSrc },
-  { width: 1920, src: webpSrc },
-] : [];
+// Zur Build-Time prüfen, ob die WebP-Datei tatsächlich existiert
+let webpExists = false;
+if (webpSrc && webpSrc !== src) {
+  try {
+    const publicDir = path.resolve(process.cwd(), 'public');
+    const webpPath = path.join(publicDir, webpSrc);
+    webpExists = fs.existsSync(webpPath);
+  } catch {
+    webpExists = false;
+  }
+}
 
 // Aspect Ratio CSS Classes
 const aspectClasses = {
@@ -61,8 +59,8 @@ const fetchPriority = priority ? 'high' : 'auto';
 ---
 
 <picture class={`block ${aspectClasses[aspectRatio]} ${className}`}>
-  <!-- WebP für moderne Browser -->
-  {webpSrc && (
+  <!-- WebP nur anbieten wenn die Datei tatsächlich existiert -->
+  {webpExists && (
     <source
       type="image/webp"
       srcset={webpSrc}
@@ -70,7 +68,7 @@ const fetchPriority = priority ? 'high' : 'auto';
     />
   )}
   
-  <!-- Fallback für ältere Browser -->
+  <!-- Fallback / Original -->
   <img
     src={src}
     alt={alt}
