@@ -68,3 +68,19 @@ coverage/
 .cache/
 .parcel-cache/
 .netlify/
+
+# Cache-Dateien
+.image-cache.json
+
+# Heruntergeladene Bilder von Notion
+public/images/news/*.jpg
+public/images/news/*.jpeg
+public/images/news/*.png
+public/images/news/*.webp
+
+# Image-Map
+src/data/image-map.json
+
+# Aber behalte die Ordner-Struktur
+!public/images/news/.gitkeep
+!src/data/.gitkeep
