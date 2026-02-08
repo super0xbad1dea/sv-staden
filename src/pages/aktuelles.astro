@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import { getPublishedNews, formatDate } from '../lib/notion';
 
 // News von Notion laden
@@ -66,19 +67,20 @@ const categories = ['Alle', '1. Mannschaft', 'Jugend', 'Verein', 'Alte Herren'];
             >
               <a href={`/aktuelles/${item.slug}`} class="block">
                 <div class="relative overflow-hidden">
-                  <div class="aspect-video bg-[#1f1f1f]">
-                    {item.image ? (
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div class="w-full h-full bg-gradient-to-br from-blue-900/50 to-[#0a0a0a] flex items-center justify-center">
-                        <span class="text-6xl opacity-30">📰</span>
-                      </div>
-                    )}
-                  </div>
+                  {item.image ? (
+                    <OptimizedImage
+                      src={item.image}
+                      alt={item.title}
+                      aspectRatio="video"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      class="group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div class="aspect-video bg-gradient-to-br from-blue-900/50 to-[#0a0a0a] flex items-center justify-center">
+                      <span class="text-6xl opacity-30">📰</span>
+                    </div>
+                  )}
                   <div class="absolute inset-0 bg-yellow-400/0 group-hover:bg-yellow-400/10 transition-colors duration-300"></div>
                   <span class="absolute top-4 left-4 bg-yellow-400 text-black px-3 py-1 text-xs font-heading font-bold tracking-wider">
                     {item.category.toUpperCase()}

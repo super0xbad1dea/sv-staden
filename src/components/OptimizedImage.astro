@@ -1,0 +1,82 @@
+---
+/**
+ * Optimierte Bild-Komponente mit:
+ * - WebP Support mit Fallback
+ * - Lazy Loading
+ * - Responsive Images
+ * - Aspect Ratio Preservation
+ */
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  aspectRatio?: 'video' | 'square' | 'landscape' | 'portrait' | 'none';
+  priority?: boolean;
+}
+
+const {
+  src,
+  alt,
+  class: className = '',
+  loading = 'lazy',
+  sizes = '100vw',
+  aspectRatio = 'video',
+  priority = false,
+} = Astro.props;
+
+// WebP-Version des Bildes
+const webpSrc = src?.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+
+// Responsive Größen generieren (für verschiedene Bildschirmbreiten)
+const srcset = src ? [
+  { width: 640, src: src },
+  { width: 768, src: src },
+  { width: 1024, src: src },
+  { width: 1280, src: src },
+  { width: 1920, src: src },
+] : [];
+
+const webpSrcset = webpSrc ? [
+  { width: 640, src: webpSrc },
+  { width: 768, src: webpSrc },
+  { width: 1024, src: webpSrc },
+  { width: 1280, src: webpSrc },
+  { width: 1920, src: webpSrc },
+] : [];
+
+// Aspect Ratio CSS Classes
+const aspectClasses = {
+  video: 'aspect-video',
+  square: 'aspect-square',
+  landscape: 'aspect-[4/3]',
+  portrait: 'aspect-[3/4]',
+  none: '',
+};
+
+const finalLoading = priority ? 'eager' : loading;
+const fetchPriority = priority ? 'high' : 'auto';
+---
+
+<picture class={`block ${aspectClasses[aspectRatio]} ${className}`}>
+  <!-- WebP für moderne Browser -->
+  {webpSrc && (
+    <source
+      type="image/webp"
+      srcset={webpSrc}
+      sizes={sizes}
+    />
+  )}
+  
+  <!-- Fallback für ältere Browser -->
+  <img
+    src={src}
+    alt={alt}
+    loading={finalLoading}
+    decoding={priority ? 'sync' : 'async'}
+    fetchpriority={fetchPriority}
+    class="w-full h-full object-cover"
+  />
+</picture>

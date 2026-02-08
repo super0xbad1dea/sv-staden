@@ -1,84 +1,112 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import { getPublishedNews, formatDate } from '../lib/notion';
 
-// Letzte 3 News-Artikel von Notion laden
-let news: any[] = [];
+// News laden (nur die neuesten 3)
+let latestNews: any[] = [];
 try {
   const allNews = await getPublishedNews();
-  news = allNews.slice(0, 3);
+  latestNews = allNews.slice(0, 3);
 } catch (e) {
-  console.error('News konnten nicht geladen werden:', e);
+  console.error('Fehler beim Laden der News:', e);
 }
 ---
 
-<BaseLayout title="Startseite">
-  <!-- HERO SECTION -->
-  <section class="relative min-h-[90vh] flex items-center overflow-hidden">
-    <div class="absolute inset-0">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-blue-900/60 z-10"></div>
-      <img src="/images/hero-bg.jpg" alt="" class="w-full h-full object-cover" />
+<BaseLayout 
+  title="Startseite" 
+  description="SV Staden 1921 e.V. - Seit über 100 Jahren vereint durch Leidenschaft, Tradition und den gemeinsamen Willen zum Erfolg."
+>
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Hintergrundbild mit Overlay -->
+    <div class="absolute inset-0 z-0">
+      <OptimizedImage
+        src="/images/hero-bg.jpg"
+        alt="SV Staden Stadion"
+        aspectRatio="none"
+        loading="eager"
+        priority={true}
+        sizes="100vw"
+        class="w-full h-full"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50"></div>
     </div>
-    
-    <div class="absolute bottom-0 left-0 right-0 h-32 bg-[#0a0a0a]" style="clip-path: polygon(0 100%, 100% 0, 100% 100%, 0 100%);"></div>
-    
-    <div class="relative z-20 container mx-auto px-4">
-      <div class="max-w-3xl">
-        <span class="inline-block text-yellow-400 font-heading tracking-[0.3em] text-sm mb-4">WILLKOMMEN</span>
-        <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-none">
-          SV STADEN<br />
-          <span class="text-yellow-400">SEIT 1921</span>
-        </h1>
-        <p class="text-xl text-gray-300 mb-8 max-w-xl leading-relaxed">
-          Seit 1921 vereint durch Leidenschaft, Tradition und den gemeinsamen Willen zum Erfolg.
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="/ueber-uns" class="bg-yellow-400 text-black px-8 py-4 font-heading font-bold tracking-wider hover:bg-white transition-colors">
-            MEHR ERFAHREN
-          </a>
-          <a href="/kontakt" class="border-2 border-white px-8 py-4 font-heading font-bold tracking-wider hover:bg-white hover:text-black transition-colors">
-            KONTAKT
-          </a>
-        </div>
+
+    <!-- Hero Content -->
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <span class="inline-block text-yellow-400 font-heading tracking-[0.3em] text-sm mb-4 animate-fade-in">
+        WILLKOMMEN
+      </span>
+      <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6 animate-slide-up">
+        SV STADEN<br/>
+        <span class="text-yellow-400">SEIT 1921</span>
+      </h1>
+      <p class="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-fade-in-delayed">
+        Seit 1921 vereint durch Leidenschaft, Tradition und den gemeinsamen Willen zum Erfolg.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delayed-2">
+        <a 
+          href="/ueber-uns" 
+          class="inline-block bg-yellow-400 text-black px-8 py-4 font-heading font-bold tracking-wider hover:bg-yellow-500 transition-all transform hover:scale-105"
+        >
+          MEHR ERFAHREN
+        </a>
+        <a 
+          href="/kontakt" 
+          class="inline-block border-2 border-yellow-400 text-yellow-400 px-8 py-4 font-heading font-bold tracking-wider hover:bg-yellow-400 hover:text-black transition-all transform hover:scale-105"
+        >
+          KONTAKT
+        </a>
       </div>
     </div>
-    
-    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-      <svg class="w-6 h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+      <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
       </svg>
     </div>
   </section>
 
-  <!-- ABOUT TEASER -->
-  <section class="py-24 bg-[#171717] relative overflow-hidden">
-    <div class="absolute left-0 top-0 bottom-0 w-1/3 bg-yellow-400/5"></div>
+  <!-- Über Uns Section -->
+  <section class="py-24 bg-[#0a0a0a]">
     <div class="container mx-auto px-4">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Bild -->
         <div class="relative">
-          <div class="absolute -top-4 -left-4 w-24 h-24 border-4 border-yellow-400"></div>
-          <img src="/images/team-photo.jpg" alt="Mannschaftsfoto" class="relative z-10 w-full aspect-[4/3] object-cover bg-[#1f1f1f]" />
-          <div class="absolute -bottom-4 -right-4 bg-yellow-400 text-black p-6 z-20">
-            <span class="font-heading text-5xl font-bold block">100+</span>
-            <span class="text-sm tracking-wider">JAHRE TRADITION</span>
-          </div>
+          <div class="absolute -inset-4 bg-gradient-to-r from-yellow-400/20 to-blue-900/20 blur-2xl"></div>
+          <OptimizedImage
+            src="/images/team-photo.jpg"
+            alt="Mannschaftsfoto"
+            aspectRatio="landscape"
+            loading="lazy"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            class="relative rounded-lg"
+          />
         </div>
-        
+
+        <!-- Text -->
         <div>
-          <span class="text-yellow-400 font-heading tracking-[0.2em] text-sm">ÜBER UNS</span>
-          <h2 class="font-heading text-4xl md:text-5xl font-bold mt-2 mb-6 accent-line">
-            EINE GROSSE<br />GESCHICHTE
-          </h2>
+          <span class="text-yellow-400 font-heading tracking-[0.2em] text-sm">100+ JAHRE TRADITION</span>
+          <h2 class="font-heading text-3xl md:text-5xl font-bold mt-3 mb-2">ÜBER UNS</h2>
+          <h3 class="font-heading text-2xl md:text-3xl font-bold text-yellow-400 mb-6">EINE GROSSE GESCHICHTE</h3>
+          
           <p class="text-gray-400 leading-relaxed mb-6">
             Der SV Staden 1921 e.V. ist ein Verein voller Leidenschaft für den Fußball. Seit der Gründung hat der Verein eine beeindruckende Geschichte voller Erfolge und Traditionen aufgebaut.
           </p>
+          
           <p class="text-gray-400 leading-relaxed mb-8">
             Wir vermitteln traditionelle Werte wie Zusammenhalt, Fairness und Respekt – und schaffen Gemeinschaftserlebnisse, die weit über den reinen Fußball hinausgehen.
           </p>
-          <a href="/ueber-uns" class="inline-flex items-center gap-2 text-yellow-400 font-heading font-bold tracking-wider hover:gap-4 transition-all">
+
+          <a 
+            href="/ueber-uns" 
+            class="inline-flex items-center gap-2 text-yellow-400 font-heading font-bold tracking-wider hover:gap-4 transition-all"
+          >
             UNSERE GESCHICHTE
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </a>
         </div>
@@ -86,92 +114,158 @@ try {
     </div>
   </section>
 
-  <!-- NEWS SECTION -->
-  <section class="py-24 bg-[#0a0a0a]">
+  <!-- News Section -->
+  <section class="py-24 bg-[#171717]">
     <div class="container mx-auto px-4">
-      <div class="text-center mb-16">
+      <div class="text-center mb-12">
         <span class="text-yellow-400 font-heading tracking-[0.2em] text-sm">AKTUELLES</span>
-        <h2 class="font-heading text-4xl md:text-5xl font-bold mt-2 accent-line accent-line-center inline-block">
-          NEUIGKEITEN
-        </h2>
+        <h2 class="font-heading text-3xl md:text-5xl font-bold mt-2">NEUIGKEITEN</h2>
       </div>
 
-      {news.length > 0 ? (
-        <div class="grid md:grid-cols-3 gap-8">
-          {news.map((item) => (
-            <article class="group cursor-pointer">
+      {latestNews.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {latestNews.map((item) => (
+            <article class="group cursor-pointer bg-[#0a0a0a] hover:bg-[#1a1a1a] transition-colors">
               <a href={`/aktuelles/${item.slug}`} class="block">
-                <div class="relative overflow-hidden mb-4">
-                  <div class="aspect-[4/3] bg-[#1f1f1f]">
-                    {item.image ? (
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div class="w-full h-full bg-gradient-to-br from-blue-900/50 to-[#0a0a0a] flex items-center justify-center">
-                        <span class="text-6xl opacity-30">📰</span>
-                      </div>
-                    )}
-                  </div>
-                  <div class="absolute inset-0 bg-yellow-400/0 group-hover:bg-yellow-400/20 transition-colors duration-300"></div>
-                  <div class="absolute bottom-0 left-0 right-0 h-1 bg-yellow-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div class="relative overflow-hidden">
+                  {item.image ? (
+                    <OptimizedImage
+                      src={item.image}
+                      alt={item.title}
+                      aspectRatio="video"
+                      loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      class="group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div class="aspect-video bg-gradient-to-br from-blue-900/50 to-[#0a0a0a] flex items-center justify-center">
+                      <span class="text-6xl opacity-30">📰</span>
+                    </div>
+                  )}
+                  <div class="absolute inset-0 bg-yellow-400/0 group-hover:bg-yellow-400/10 transition-colors duration-300"></div>
                   <span class="absolute top-4 left-4 bg-yellow-400 text-black px-3 py-1 text-xs font-heading font-bold tracking-wider">
-                    {(item.category || 'VEREIN').toUpperCase()}
+                    {item.category.toUpperCase()}
                   </span>
                 </div>
-                <span class="text-gray-500 text-sm">{formatDate(item.date)}</span>
-                <h3 class="font-heading text-xl font-bold mt-2 group-hover:text-yellow-400 transition-colors">
-                  {item.title}
-                </h3>
+                <div class="p-6">
+                  <span class="text-gray-500 text-sm">{formatDate(item.date)}</span>
+                  <h3 class="font-heading text-xl font-bold mt-2 mb-3 group-hover:text-yellow-400 transition-colors leading-tight">
+                    {item.title}
+                  </h3>
+                  <p class="text-gray-400 text-sm leading-relaxed line-clamp-3">
+                    {item.excerpt}
+                  </p>
+                  <div class="inline-flex items-center gap-2 text-yellow-400 text-sm font-heading font-bold tracking-wider mt-4 group-hover:gap-3 transition-all">
+                    WEITERLESEN
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                  </div>
+                </div>
               </a>
             </article>
           ))}
         </div>
       ) : (
         <div class="text-center py-12">
-          <span class="text-6xl mb-4 block opacity-30">📰</span>
-          <p class="text-gray-500">Noch keine Neuigkeiten vorhanden.</p>
+          <span class="text-6xl mb-4 block opacity-50">📰</span>
+          <p class="text-gray-400">Noch keine News vorhanden.</p>
         </div>
       )}
 
       <div class="text-center mt-12">
-        <a href="/aktuelles" class="inline-block border-2 border-yellow-400 text-yellow-400 px-8 py-3 font-heading font-bold tracking-wider hover:bg-yellow-400 hover:text-black transition-colors">
+        <a 
+          href="/aktuelles" 
+          class="inline-block border-2 border-yellow-400 text-yellow-400 px-8 py-3 font-heading font-bold tracking-wider hover:bg-yellow-400 hover:text-black transition-colors"
+        >
           ALLE NEUIGKEITEN
         </a>
       </div>
     </div>
   </section>
 
-  <!-- SPONSORS -->
-  <section class="py-16 bg-[#0a0a0a] border-y border-white/10">
+  <!-- Sponsoren Section -->
+  <section class="py-24 bg-[#0a0a0a]">
     <div class="container mx-auto px-4">
-      <div class="text-center mb-8">
-        <span class="text-gray-500 font-heading tracking-[0.2em] text-xs">UNSERE PARTNER</span>
+      <div class="text-center mb-12">
+        <span class="text-yellow-400 font-heading tracking-[0.2em] text-sm">UNSERE PARTNER</span>
       </div>
-      <div class="flex flex-wrap items-center justify-center gap-12 opacity-60 hover:opacity-100 transition-opacity">
-        <a href="#" class="text-2xl font-heading text-gray-400 hover:text-yellow-400 transition-colors">SPONSOR 1</a>
-        <a href="#" class="text-2xl font-heading text-gray-400 hover:text-yellow-400 transition-colors">SPONSOR 2</a>
-        <a href="#" class="text-2xl font-heading text-gray-400 hover:text-yellow-400 transition-colors">SPONSOR 3</a>
-        <a href="#" class="text-2xl font-heading text-gray-400 hover:text-yellow-400 transition-colors">SPONSOR 4</a>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+        {[1, 2, 3, 4].map((i) => (
+          <a 
+            href="#" 
+            class="flex items-center justify-center h-24 bg-[#171717] hover:bg-[#1f1f1f] transition-colors border border-white/10 hover:border-yellow-400/50"
+          >
+            <span class="text-gray-600 font-heading tracking-wider">SPONSOR {i}</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-24 bg-blue-900 relative overflow-hidden">
-    <div class="absolute inset-0 bg-blue-900/50"></div>
+  <!-- CTA Section -->
+  <section class="py-24 bg-gradient-to-r from-blue-900/50 to-yellow-400/20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('/images/hero-bg.jpg')] opacity-10 bg-cover bg-center"></div>
     <div class="container mx-auto px-4 text-center relative z-10">
-      <h2 class="font-heading text-4xl md:text-6xl font-bold mb-6">
-        WERDE TEIL DER<br /><span class="text-yellow-400">SV STADEN FAMILIE!</span>
+      <h2 class="font-heading text-3xl md:text-5xl font-bold mb-6">
+        WERDE TEIL DER<br/>
+        <span class="text-yellow-400">SV STADEN FAMILIE!</span>
       </h2>
-      <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+      <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-10">
         Egal ob als aktiver Spieler, Unterstützer oder Fan – bei uns ist jeder willkommen.
       </p>
-      <a href="/kontakt" class="inline-block bg-yellow-400 text-black px-10 py-4 font-heading font-bold tracking-wider text-lg hover:bg-white transition-colors">
+      <a 
+        href="/kontakt" 
+        class="inline-block bg-yellow-400 text-black px-10 py-4 font-heading font-bold tracking-wider hover:bg-yellow-500 transition-all transform hover:scale-105"
+      >
         JETZT KONTAKT AUFNEHMEN
       </a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+
+  .animate-fade-in-delayed {
+    animation: fade-in 1s ease-out 0.3s both;
+  }
+
+  .animate-fade-in-delayed-2 {
+    animation: fade-in 1s ease-out 0.6s both;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out;
+  }
+</style>
